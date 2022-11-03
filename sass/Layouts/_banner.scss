@@ -1,0 +1,24 @@
+.banner {
+    // background: color url() position/ bg-size bg-repeat
+    // (0: căn lề bên trái)
+    // (30%: thẻ nhỏ khoảng 30%)
+    // 42% bắt đầu từ 42%->100% màu nếu ko nhập thì là 0%->100%
+    // sự kết hợp giữa hình nền + màu trôi = thành hình banner
+    background: url('../img/udemy-logo-semi-transparent.svg') 0/30% no-repeat,linear-gradient(61deg, $color-purple, $color-blue-1 41%);
+    // hòa trộn màu | overlay: trung hòa 2 nền background lại với nhau (image+linear)
+    background-blend-mode: overlay;
+    height: 325px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    h2 {
+        @include styleText($color-white-0, $fs-4, $fw-0);
+    }
+    p {
+        color: $color-white-0;
+        margin-bottom: 0;
+    }
+    button {
+        margin: $mg-0 + 5 0;
+    }
+}

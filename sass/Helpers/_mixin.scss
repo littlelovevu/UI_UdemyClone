@@ -1,0 +1,99 @@
+// Không có tham số
+// @mixin styleText {
+//     color: white;
+//     font-size: 13px;
+// }
+
+// Có tham số
+@mixin styleText($color, $fs, $fw) {
+    color: $color;
+    font-size: $fs;
+    font-weight: $fw;
+}
+
+@mixin styleButton($color, $bg-color, $border, $fs, $fw, $pd-y, $pd-x) {
+    color: $color;
+    background-color: $bg-color;
+    border: $border;
+    font-size: $fs;
+    font-weight: $fw;
+    padding: $pd-y $pd-x;
+    cursor: pointer;
+}
+
+@mixin hoverButton($color-hover, $bg-hover, $border-hover) {
+    color: $color-hover;
+    background-color: $bg-hover;
+    border: 1px solid $border-hover;
+}
+
+@mixin styleFormSearch($bg-color, $bg-color-focus, $border-color, $color) {
+    .input-group {
+        background-color: $bg-color;
+        .form-control {
+            background-color: transparent;
+            border-color: transparent;
+            box-shadow: none;
+            transition: none;
+            color: $color;
+            &::placeholder {
+                color: $color;
+            }
+            &:focus {
+                // hiệu ứng chung với input + button
+                background-color: $bg-color-focus;
+                border-top-color: $border-color;
+                border-bottom-color: $border-color;
+                border-left-color: $border-color;
+            }
+            // +: chỉ dành cho class có cùng cấp
+            &:focus + .input-group-append {
+                .input-group-text {
+                    background-color: $bg-color-focus;
+                    border-top-color: $border-color;
+                    border-bottom-color: $border-color;
+                    border-right-color: $border-color;
+                    color: $color-red-0;
+                    // &: đại diện tên class đang chứa nó
+                    &:hover {
+                        color: $color-white-0;
+                        background-color: $color-red-0;
+                    }
+                }
+            }
+        }
+        .input-group-append {
+            .input-group-text {
+                background-color: transparent;
+                border-color: transparent;
+                color: $color-red-0;
+                // &: đại diện tên class đang chứa nó
+                &:hover {
+                    color: $color-white-0;
+                    background-color: $color-red-0;
+                }
+            }
+        }
+    }
+}
+
+// breakpoint: mảng chứa các biến màn hình
+// screen: tên màn hình (vd: extra-large, large, ...)
+
+// truyền tham số là tên màn hình
+@mixin responsive($screen) {
+    // kiểm tra trong breakpoints có tên màn hình screen ko?
+    @if map-has-key($map: $breakpoints, $key: $screen) {
+        // lấy giá trị của màn hình đó vd: 1200px
+        $value: map-get($map: $breakpoints, $key: $screen);
+        // gắn giá trị value vô media đó
+        @media screen and (max-width: $value) {
+            // chứa những css khi bạn điền vào (vd: display: none) của _header
+            @content;
+        }
+    }
+    // không có màn hình đó
+    @else {
+        @warn "`{$screen}` isn't exist in breakpoints";
+    }
+}

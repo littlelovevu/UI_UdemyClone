@@ -1,0 +1,36 @@
+.cover {
+    // sass thì chạy default brower sẽ lỗi hình, live sever ko sao
+    // hãy hình dung bắt đầu từ file css chứ ko phải sass
+    // background-image: url('../../img/cover.jpg'); sai nhé
+    background-image: url('../img/cover.jpg');
+    // . thì css thêm class cha backgroundImg vô cho cover
+    // @extend .backgroundImg;
+    // % thì thêm các thuộc tính của backgroundImg cho css của cover
+    @extend %backgroundImg;
+    height: 500px;
+    position: relative;
+    .cover__content {
+        max-width: 500px;
+        position: absolute;
+        top: 50%;
+        left: 12%;
+        // kĩ thuật căn giữa chiều dọc
+        transform: translateY(-50%);
+        h1 {
+            @include styleText($color-white-0, $fs-2, $fw-2);
+        }
+        p {
+            @include styleText($color-white-0, $fs-3, $fw-0);
+        }
+        .cover__form {
+            @include styleFormSearch($color-white-0, $color-white-0, $color-white-0, $color-black-light);
+        }
+    }
+
+    @include responsive("small") {
+        .cover__content {
+            max-width: 400px;
+            left: 10%;
+        }
+    }
+}
